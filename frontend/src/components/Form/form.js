@@ -1,8 +1,9 @@
 import React from 'react'
+import classes from './styles'
 
 const Form = () => {
   return (
-    <div>Form</div>
+    <h1>Form</h1>
   )
 }
 
