@@ -1,12 +1,23 @@
+import { useEffect } from 'react'
 import {Container, AppBar, Typography, Grow, Grid} from '@mui/material'
+import { useDispatch } from 'react-redux'
+
 import memories from './images/memories.png'
 import Form from './components/Form/form'
 import Posts from './components/Posts/posts'
 import classes  from './styles';
 
+import {getPosts} from './actions/posts'
 
 
 function App() {
+
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(getPosts());
+  }, [dispatch])
+
   return (
     <Container maxWidth="lg">
       <AppBar style={classes.appBar} position="static" color="inherit">
