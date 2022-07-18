@@ -6,7 +6,7 @@ import { Provider } from "react-redux";
 
 import postReducer from './reducers/posts';
 
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const store = configureStore({
