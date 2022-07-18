@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import classes from './styles'
 import { createPost } from '../../actions/posts';
 
+import { toast } from "react-toastify";
+
 
 const Form = () => {
   const dispatch = useDispatch();
@@ -23,11 +25,25 @@ const Form = () => {
     data.append("message", postData.message);
     data.append("tags", postData.tags);
     data.append('image', postData.image)
-    dispatch(createPost(data));
+
+    let notAllowedfileType = checkFileType(postData.image);
+    if (!notAllowedfileType) {
+      dispatch(createPost(data));
+    } else {
+      toast.error("File type must be an image");
+    }
   }
 
   const reset = () => {
 
+  }
+
+  const checkFileType = (file) => {
+    if (!file.type.includes("image/")) {
+      return true
+    } else {
+      return false
+    }
   }
 
   return (
@@ -37,7 +53,6 @@ const Form = () => {
         onSubmit={handleSubmit}
         autoComplete="off"
         encType="multipart/form-data"
-        noValidate
       >
         <Typography variant="h6">Creating a memory</Typography>
         <TextField
@@ -49,6 +64,7 @@ const Form = () => {
           onChange={(e) =>
             setPostData({ ...postData, creator: e.target.value })
           }
+          required
         />
         <TextField
           name="title"
@@ -57,6 +73,7 @@ const Form = () => {
           fullWidth
           value={postData.title}
           onChange={(e) => setPostData({ ...postData, title: e.target.value })}
+          required
         />
         <TextField
           name="message"
@@ -67,6 +84,7 @@ const Form = () => {
           onChange={(e) =>
             setPostData({ ...postData, message: e.target.value })
           }
+          required
         />
         <TextField
           name="tags"
@@ -75,12 +93,17 @@ const Form = () => {
           fullWidth
           value={postData.tags}
           onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
+          required
         />
         <div style={classes.fileInput}>
           <Input
             type="file"
             name="file"
-            onChange={(e) => setPostData({ ...postData, image: e.target.files[0] })}
+            onChange={(e) =>
+              setPostData({ ...postData, image: e.target.files[0] })
+            }
+            required
+            accept="image/*"
           />
         </div>
         <Button
