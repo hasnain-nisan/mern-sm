@@ -1,0 +1,22 @@
+@host = http://localhost:5000/api/v1/posts
+
+
+###
+GET {{host}} HTTP/1.1
+content-type: application/json
+
+{
+
+}
+
+###
+POST {{host}} HTTP/1.1
+content-type: application/json
+
+{
+    "creator": "",
+    "title": "",
+    "message": "",
+    "tags": "",
+    "file": ""
+}

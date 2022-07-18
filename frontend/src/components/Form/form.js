@@ -1,6 +1,5 @@
 import React, {useState} from 'react'
-import { TextField, Button, Typography, Paper } from '@mui/material'
-import FileBase from 'react-file-base64'
+import { TextField, Button, Typography, Paper, Input } from '@mui/material'
 import { useDispatch } from "react-redux";
 import classes from './styles'
 import { createPost } from '../../actions/posts';
@@ -13,12 +12,18 @@ const Form = () => {
     title: '',
     message: '',
     tags: '',
-    selectedFile: ''
+    image: ''
   })
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    dispatch(createPost(postData));
+    let data = new FormData()
+    data.append("creator", postData.creator);
+    data.append("title", postData.title);
+    data.append("message", postData.message);
+    data.append("tags", postData.tags);
+    data.append('image', postData.image)
+    dispatch(createPost(data));
   }
 
   const reset = () => {
@@ -31,6 +36,7 @@ const Form = () => {
         style={classes.form}
         onSubmit={handleSubmit}
         autoComplete="off"
+        encType="multipart/form-data"
         noValidate
       >
         <Typography variant="h6">Creating a memory</Typography>
@@ -71,12 +77,10 @@ const Form = () => {
           onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
         />
         <div style={classes.fileInput}>
-          <FileBase
+          <Input
             type="file"
-            multiple={true}
-            onDone={({ base64 }) =>
-              setPostData({ ...postData, selectedFile: base64 })
-            }
+            name="file"
+            onChange={(e) => setPostData({ ...postData, image: e.target.files[0] })}
           />
         </div>
         <Button

@@ -20,7 +20,7 @@ const postSchema = mongoose.Schema({
 //     required: [true, "Please provide a user"],
 //   },
   tags: {
-    type: String,
+    type: [String],
     require: [true, "Please provide atleast one tag"]
   },
   file: {

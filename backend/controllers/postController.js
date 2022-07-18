@@ -1,3 +1,4 @@
+const { request } = require('express')
 const Post = require('../models/Post')
 
 
@@ -11,6 +12,10 @@ const getAllPosts = async (req, res) => {
 }
 
 const createPost = async (req, res) => {
+    let imageName = req.file.path
+    //adding imageName to req.body
+    req.body.file = imageName
+
     const post = req.body
     const newPost = new Post(post)
     try {

@@ -28,13 +28,14 @@ app.use(
   })
 );
 app.use(express.json());
+app.use(bodyParser.json({ limit: "100mb", extended: true }));
+app.use(bodyParser.urlencoded({ limit: "100mb", extended: true }));
 app.use(helmet());
-app.use(bodyParser.json({ limit: "30mb", extended: true }));
-app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
 app.use(cors());
 app.use(xss());
 
 
+app.use("/files", express.static("files"));
 //roooutes
 app.use('/api/v1/posts', postRoutes)
 
