@@ -4,7 +4,7 @@ const classes = {
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-    padding: 2,
+    padding: 15,
     width: "fit-content"
   },
   form: {
