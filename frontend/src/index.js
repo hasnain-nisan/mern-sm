@@ -9,12 +9,16 @@ import postReducer from './reducers/posts';
 
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { devToolsEnhancer } from '@redux-devtools/extension';
 
-const store = configureStore({
-  reducer: {
-    posts: postReducer
+const store = configureStore(
+  {
+    reducer: {
+      postData: postReducer,
+    },
   },
-});
+  devToolsEnhancer()
+);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

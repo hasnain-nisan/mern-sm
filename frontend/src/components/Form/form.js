@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 import { TextField, Button, Typography, Paper, Input } from '@mui/material'
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import classes from './styles'
-import { createPost } from '../../actions/posts';
+import { createPost, upDatePost } from '../../actions/posts';
 
 import { toast } from "react-toastify";
 
@@ -17,8 +17,13 @@ const Form = () => {
     image: ''
   })
 
+  const currentPostID = useSelector((state) => state.postData.currentPostId);
+
+  const post = useSelector((state) => currentPostID ? state.postData.posts.find((p) => p._id === currentPostID) : null)
+
   const handleSubmit = (e) => {
     e.preventDefault()
+    let notAllowedfileType = false;
     let data = new FormData()
     data.append("creator", postData.creator);
     data.append("title", postData.title);
@@ -26,9 +31,15 @@ const Form = () => {
     data.append("tags", postData.tags);
     data.append('image', postData.image)
 
-    let notAllowedfileType = checkFileType(postData.image);
+    if(postData.image !== ""){
+      notAllowedfileType = checkFileType(postData.image);
+    }
     if (!notAllowedfileType) {
-      dispatch(createPost(data));
+      if (currentPostID) {
+        dispatch(upDatePost(currentPostID, data));
+      } else {
+        dispatch(createPost(data));
+      }
     } else {
       toast.error("File type must be an image");
     }
@@ -45,6 +56,23 @@ const Form = () => {
       return false
     }
   }
+
+  useEffect(() => {
+    if (post) setPostData(post);
+  }, [post]);
+
+  useEffect(() => {
+    if (!currentPostID){
+      setPostData({
+        creator: "",
+        title: "",
+        message: "",
+        tags: "",
+        image: "",
+      });
+      document.getElementById('image').value = ""
+    }
+  }, [currentPostID]);
 
   return (
     <Paper style={classes.paper}>
@@ -65,6 +93,7 @@ const Form = () => {
             setPostData({ ...postData, creator: e.target.value })
           }
           required
+          style={{ margin: '5px' }}
         />
         <TextField
           name="title"
@@ -74,6 +103,7 @@ const Form = () => {
           value={postData.title}
           onChange={(e) => setPostData({ ...postData, title: e.target.value })}
           required
+          style={{ margin: '5px' }}
         />
         <TextField
           name="message"
@@ -85,6 +115,7 @@ const Form = () => {
             setPostData({ ...postData, message: e.target.value })
           }
           required
+          style={{ margin: '5px' }}
         />
         <TextField
           name="tags"
@@ -94,9 +125,11 @@ const Form = () => {
           value={postData.tags}
           onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
           required
+          style={{ margin: '5px' }}
         />
         <div style={classes.fileInput}>
           <Input
+            id="image"
             type="file"
             name="file"
             onChange={(e) =>
@@ -104,6 +137,7 @@ const Form = () => {
             }
             required
             accept="image/*"
+            style={{ margin: '5px' }}
           />
         </div>
         <Button

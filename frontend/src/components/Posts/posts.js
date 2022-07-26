@@ -6,9 +6,7 @@ import { useSelector } from 'react-redux'
 
 const Posts = () => {
 
-  const posts = useSelector((state) => state.posts)
-
-  console.log(posts);
+  const posts = useSelector((state) => state.postData.posts)
 
   return (
     !posts.length ? <CircularProgress /> : (

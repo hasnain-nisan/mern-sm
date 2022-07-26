@@ -1,4 +1,5 @@
 import React from 'react'
+import { useDispatch, useSelector } from "react-redux";
 import {Card, CardActions, CardContent, CardMedia, Button, Typography} from '@mui/material'
 import {MdThumbUp, MdDelete} from 'react-icons/md'
 import { BsThreeDots } from "react-icons/bs";
@@ -8,10 +9,19 @@ import classes from './styles'
 
 const Post = ({post}) => {
 
+  const dispatch = useDispatch();
+
   const filePath = (str) => {
     const url = "http://localhost:3000/";
     const file = str.split("\\");
     return url + file[0] + '/' + file[1]
+  }
+
+  const setCurrentPostId = (id) => {
+    dispatch({
+      type: "SET_CURRENT_POST_ID",
+      payload: id,
+    });
   }
 
   return (
@@ -28,7 +38,7 @@ const Post = ({post}) => {
         </Typography>
       </div>
       <div style={classes.overlay2}>
-        <Button style={{ color: "white" }} size="small" onClick={() => {}}>
+        <Button style={{ color: "white" }} size="small" onClick={() => setCurrentPostId(post._id)}>
           <BsThreeDots size={25}/>
         </Button>
       </div>
