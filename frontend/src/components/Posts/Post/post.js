@@ -1,6 +1,6 @@
 import React from 'react'
 import { deletePost } from '../../../actions/posts';
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {Card, CardActions, CardContent, CardMedia, Button, Typography} from '@mui/material'
 import {MdThumbUp, MdDelete} from 'react-icons/md'
 import { BsThreeDots } from "react-icons/bs";
