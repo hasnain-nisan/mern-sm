@@ -58,8 +58,25 @@ const updatePost = async (req, res) => {
   }
 };
 
+const deletePost = async (req, res) => {
+  const { id: _id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
+    res.status(404).json({ message: `No post available with the id: ${_id}` });
+  }
+  try {
+    const post = await Post.findByIdAndRemove(_id)
+    let oldFilePath = post.file;
+    //unlink old image
+    fs.unlinkSync(oldFilePath);
+    res.status(200).json({message: `Successfully deleted`})
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+}
+
 module.exports = {
   getAllPosts,
   createPost,
   updatePost,
+  deletePost
 };

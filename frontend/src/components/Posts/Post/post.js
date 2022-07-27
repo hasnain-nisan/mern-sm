@@ -1,4 +1,5 @@
 import React from 'react'
+import { deletePost } from '../../../actions/posts';
 import { useDispatch, useSelector } from "react-redux";
 import {Card, CardActions, CardContent, CardMedia, Button, Typography} from '@mui/material'
 import {MdThumbUp, MdDelete} from 'react-icons/md'
@@ -23,6 +24,10 @@ const Post = ({post}) => {
       payload: id,
     });
   }
+
+  const handleDeletePost = (id) => {
+    dispatch(deletePost(id))
+  };
 
   return (
     <Card style={classes.card}>
@@ -58,7 +63,7 @@ const Post = ({post}) => {
           Like
           {post.likeCount}
         </Button>
-        <Button size="small" color="primary" onClick={() => {}}>
+        <Button size="small" color="primary" onClick={() => handleDeletePost(post._id)}>
           <MdDelete />
           Delete
         </Button>

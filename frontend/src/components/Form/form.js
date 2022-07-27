@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react'
 import { TextField, Button, Typography, Paper, Input } from '@mui/material'
 import { useDispatch, useSelector } from "react-redux";
 import classes from './styles'
-import { createPost, upDatePost } from '../../actions/posts';
+import { createPost, updatePost } from '../../actions/posts';
 
 import { toast } from "react-toastify";
 
@@ -36,7 +36,7 @@ const Form = () => {
     }
     if (!notAllowedfileType) {
       if (currentPostID) {
-        dispatch(upDatePost(currentPostID, data));
+        dispatch(updatePost(currentPostID, data));
       } else {
         dispatch(createPost(data));
       }
