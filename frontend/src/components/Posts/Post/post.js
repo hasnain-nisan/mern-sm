@@ -6,6 +6,8 @@ import {MdThumbUp, MdDelete} from 'react-icons/md'
 import { BsThreeDots } from "react-icons/bs";
 import moment from 'moment'
 
+import {SET_CURRENT_POST_ID} from '../../../constants/actionTypes'
+
 import classes from './styles'
 
 const Post = ({post}) => {
@@ -20,7 +22,7 @@ const Post = ({post}) => {
 
   const setCurrentPostId = (id) => {
     dispatch({
-      type: "SET_CURRENT_POST_ID",
+      type: SET_CURRENT_POST_ID,
       payload: id,
     });
   }

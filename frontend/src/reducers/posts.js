@@ -1,7 +1,10 @@
-// const postData = {
-//     posts: [],
-//     currentPostId: null
-// }
+import {
+  FETCH_ALL,
+  CREATE,
+  UPDATE,
+  DELETE,
+  SET_CURRENT_POST_ID,
+} from "../constants/actionTypes";
 
 const postReducer = (
   postData = {
@@ -11,25 +14,25 @@ const postReducer = (
   action
 ) => {
   switch (action.type) {
-    case "FETCH_ALL":
+    case FETCH_ALL:
       return { ...postData, posts: action.payload };
-    case "CREATE":
+    case CREATE:
       return { ...postData, posts: [...postData.posts, action.payload] };
-    case "UPDATE":
+    case UPDATE:
       return {
         ...postData,
         posts: postData.posts.map((post) =>
           post._id === action.payload._id ? action.payload : post
         ),
       };
-    case "DELETE":
+    case DELETE:
       return {
         ...postData,
         posts: postData.posts.filter((post) =>
           post._id !== action.payload
         ),
       };
-    case "SET_CURRENT_POST_ID":
+    case SET_CURRENT_POST_ID:
       return { ...postData, currentPostId: action.payload };
     default:
       return postData;
