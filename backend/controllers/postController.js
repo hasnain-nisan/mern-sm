@@ -74,9 +74,25 @@ const deletePost = async (req, res) => {
   }
 }
 
+const likePost = async (req, res) => {
+  const { id: _id } = req.params;
+  if (!mongoose.Types.ObjectId.isValid(_id)) {
+    res.status(404).json({ message: `No post available with the id: ${_id}` });
+  }
+  try {
+    const post = await Post.findById(_id);
+    post.likeCount = Number(post.likeCount) + 1;
+    await post.save();
+    res.status(201).json(post);
+  } catch (error) {
+    res.status(404).json({ message: error.message });
+  }
+}
+
 module.exports = {
   getAllPosts,
   createPost,
   updatePost,
-  deletePost
+  deletePost,
+  likePost
 };

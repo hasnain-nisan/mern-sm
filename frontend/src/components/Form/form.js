@@ -39,6 +39,7 @@ const Form = () => {
         dispatch(updatePost(currentPostID, data));
       } else {
         dispatch(createPost(data));
+        reset()
       }
     } else {
       toast.error("File type must be an image");
@@ -46,7 +47,15 @@ const Form = () => {
   }
 
   const reset = () => {
-
+    setPostData({
+      creator: "",
+      title: "",
+      message: "",
+      tags: "",
+      image: "",
+    });
+    document.getElementById("form-title").textContent = "Creating a memory";
+    document.getElementById("image").value = "";
   }
 
   const checkFileType = (file) => {
@@ -58,7 +67,10 @@ const Form = () => {
   }
 
   useEffect(() => {
-    if (post) setPostData(post);
+    if (post) {
+      setPostData(post)
+      document.getElementById("form-title").textContent = "Editing a memory";
+    };
   }, [post]);
 
   useEffect(() => {
@@ -82,7 +94,7 @@ const Form = () => {
         autoComplete="off"
         encType="multipart/form-data"
       >
-        <Typography variant="h6">Creating a memory</Typography>
+        <Typography variant="h6" id="form-title">Creating a memory</Typography>
         <TextField
           name="creator"
           variant="outlined"
@@ -123,7 +135,7 @@ const Form = () => {
           label="Tags"
           fullWidth
           value={postData.tags}
-          onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
+          onChange={(e) => setPostData({ ...postData, tags: e.target.value.split(", ") })}
           required
           style={{ margin: '5px' }}
         />

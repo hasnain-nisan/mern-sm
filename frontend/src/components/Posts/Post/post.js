@@ -1,5 +1,5 @@
 import React from 'react'
-import { deletePost } from '../../../actions/posts';
+import { deletePost, likePost } from '../../../actions/posts';
 import { useDispatch } from "react-redux";
 import {Card, CardActions, CardContent, CardMedia, Button, Typography} from '@mui/material'
 import {MdThumbUp, MdDelete} from 'react-icons/md'
@@ -29,6 +29,10 @@ const Post = ({post}) => {
     dispatch(deletePost(id))
   };
 
+  const handleLikePost = (id) => {
+    dispatch(likePost(id))
+  }
+
   return (
     <Card style={classes.card}>
       <CardMedia
@@ -43,27 +47,46 @@ const Post = ({post}) => {
         </Typography>
       </div>
       <div style={classes.overlay2}>
-        <Button style={{ color: "white" }} size="small" onClick={() => setCurrentPostId(post._id)}>
-          <BsThreeDots size={25}/>
+        <Button
+          style={{ color: "white" }}
+          size="small"
+          onClick={() => setCurrentPostId(post._id)}
+        >
+          <BsThreeDots size={25} />
         </Button>
       </div>
       <div style={classes.details}>
         <Typography variant="body2" color="textSecondary">
-          {post.tags[0].split(",").map((tag) => `#${tag}, `)}
+          {post.tags.map((tag) => `#${tag}, `)}
         </Typography>
       </div>
+      <Typography style={classes.title} variant="h5" gutterBottom>
+        {post.title}
+      </Typography>
       <CardContent>
-        <Typography style={classes.title} variant="h5" gutterBottom>
+        <Typography
+          variant="body2"
+          color="textSecondary"
+          gutterBottom
+        >
           {post.message}
         </Typography>
       </CardContent>
       <CardActions style={classes.cardActions}>
-        <Button size="small" color="primary" onClick={() => {}}>
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => handleLikePost(post._id)}
+        >
           <MdThumbUp />
           Like
           {post.likeCount}
         </Button>
-        <Button size="small" color="primary" onClick={() => handleDeletePost(post._id)}>
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => handleDeletePost(post._id)}
+        >
           <MdDelete />
           Delete
         </Button>
