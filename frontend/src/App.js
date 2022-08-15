@@ -1,13 +1,12 @@
 import { useEffect } from 'react'
-import {Container, AppBar, Typography, Grow, Grid} from '@mui/material'
+import {Container, Grow, Grid} from '@mui/material'
 import { useDispatch } from 'react-redux'
 
-import memories from './images/memories.png'
 import Form from './components/Form/form'
 import Posts from './components/Posts/posts'
-import classes  from './styles';
 
 import {getPosts} from './actions/posts'
+import Navbar from './components/Navbar/Navbar'
 
 
 function App() {
@@ -20,12 +19,7 @@ function App() {
 
   return (
     <Container maxWidth="lg">
-      <AppBar style={classes.appBar} position="static" color="inherit">
-        <Typography style={classes.heading} variant="h2" align="center">
-          Memories
-        </Typography>
-        <img style={classes.image} src={memories} alt="memories" height="60" />
-      </AppBar>
+      <Navbar/>
       <Grow in>
         <Grid
           container

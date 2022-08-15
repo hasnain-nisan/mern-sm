@@ -8,7 +8,7 @@ const fileValidate = require('../utils/file-validation');
 
 router.get('/', getAllPosts)
 router.post("/", uploadMulterSingle, fileValidate, createPost)
-router.patch('/:id', uploadMulterSingle, updatePost)
+router.patch("/:id", uploadMulterSingle, fileValidate, updatePost);
 router.delete('/:id', deletePost)
 router.patch("/:id/likePost", likePost);
 
