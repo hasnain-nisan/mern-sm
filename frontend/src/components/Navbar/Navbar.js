@@ -1,16 +1,58 @@
-import { AppBar, Typography } from '@mui/material';
+import { AppBar, Avatar, Button, Toolbar, Typography } from '@mui/material';
 import React from 'react'
 import classes from '../../styles';
+import {Link} from 'react-router-dom'
 
 import memories from '../../images/memories.png'
 
 const Navbar = () => {
+
+  const user = null;
+
   return (
     <AppBar style={classes.appBar} position="static" color="inherit">
-      <Typography style={classes.heading} variant="h2" align="center">
-        Memories
-      </Typography>
-      <img style={classes.image} src={memories} alt="memories" height="60" />
+      <div style={classes.brandContainer}>
+        <Typography
+          // component={Link}
+          // to="/"
+          style={classes.heading}
+          variant="h2"
+          align="center"
+          display={{ xs: "none", sm: "block" }}
+        >
+          Memories
+        </Typography>
+        <img style={classes.image} src={memories} alt="memories" height="60" />
+      </div>
+      <Toolbar style={classes.toolbar}>
+        {user ? (
+          <div style={classes.profile}>
+            <Avatar style={classes.avatar} alt={user.name} src={user.avatar}>
+              {user.name.charAt(0)}
+            </Avatar>
+            <Typography style={classes.username} variant="h6">
+              {user.name}
+            </Typography>
+            <Button
+              variant="contained"
+              style={classes.logout}
+              color="secondary"
+            >
+              Logout
+            </Button>
+          </div>
+        ) : (
+          <Button
+            // component={Link}
+            // to="/sing-in"
+            variant="contained"
+            style={classes.signIn}
+            color="primary"
+          >
+            Signin
+          </Button>
+        )}
+      </Toolbar>
     </AppBar>
   );
 }
