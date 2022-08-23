@@ -1,3 +1,4 @@
+import { padding } from "@mui/system"
 
 const classes = {
     appBar: {
@@ -15,7 +16,8 @@ const classes = {
     },
     image: {
         marginLeft: "15px",
-        cursor: "pointer"
+        cursor: "pointer",
+        padding: "10px 0px"
     },
     brandContainer: {
         display: "flex",

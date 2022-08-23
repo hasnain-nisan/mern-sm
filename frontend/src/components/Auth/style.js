@@ -17,6 +17,11 @@ const classes = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    flexDirection: "column",
+    marginBottom: "10px",
+  },
+  submit: {
+    marginTop: "20px",
   }
 };
 

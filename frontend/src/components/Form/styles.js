@@ -5,7 +5,8 @@ const classes = {
     flexDirection: "column",
     alignItems: "center",
     padding: 15,
-    width: "fit-content"
+    width: "fit-content",
+    borderRadius: "15px",
   },
   form: {
     display: "flex",
