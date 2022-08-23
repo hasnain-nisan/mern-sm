@@ -6,7 +6,7 @@ import {getPosts} from './actions/posts'
 import Navbar from './components/Navbar/Navbar'
 import Home from './components/Home/Home'
 
-import { Routes, Route, Link } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Auth from './components/Auth/Auth'
 
 
