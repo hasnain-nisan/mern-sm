@@ -11,9 +11,11 @@ const classes = {
     },
     heading: {
         color: "rgba(0,183,255, 1)",
+        textDecoration: "none"
     },
     image: {
         marginLeft: "15px",
+        cursor: "pointer"
     },
     brandContainer: {
         display: "flex",

@@ -1,20 +1,21 @@
 import { AppBar, Avatar, Button, Toolbar, Typography } from '@mui/material';
 import React from 'react'
 import classes from '../../styles';
-import {Link} from 'react-router-dom'
+import {Link, useNavigate} from 'react-router-dom'
 
 import memories from '../../images/memories.png'
 
 const Navbar = () => {
 
   const user = null;
+  const navigate = useNavigate();
 
   return (
     <AppBar style={classes.appBar} position="static" color="inherit">
       <div style={classes.brandContainer}>
         <Typography
-          // component={Link}
-          // to="/"
+          component={Link}
+          to="/"
           style={classes.heading}
           variant="h2"
           align="center"
@@ -22,7 +23,13 @@ const Navbar = () => {
         >
           Memories
         </Typography>
-        <img style={classes.image} src={memories} alt="memories" height="60" />
+        <img
+          style={classes.image}
+          src={memories}
+          alt="memories"
+          height="60"
+          onClick={() => navigate('/')}
+        />
       </div>
       <Toolbar style={classes.toolbar}>
         {user ? (
@@ -43,13 +50,13 @@ const Navbar = () => {
           </div>
         ) : (
           <Button
-            // component={Link}
-            // to="/sing-in"
+            component={Link}
+            to="/auth"
             variant="contained"
             style={classes.signIn}
             color="primary"
           >
-            Signin
+            Sign in
           </Button>
         )}
       </Toolbar>
