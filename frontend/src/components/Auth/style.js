@@ -22,6 +22,12 @@ const classes = {
   },
   submit: {
     marginTop: "20px",
+  },
+  googleBtn: {
+    marginTop: "15px",
+  },
+  switch: {
+    fontSize: "10px",
   }
 };
 

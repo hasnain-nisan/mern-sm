@@ -8,7 +8,7 @@ import Input from './Input';
 
 const Auth = () => {
 
-    const isSignUp = true
+    const [isSignUp, setIsSignUp] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
 
     const handleSubmit = () => {
@@ -22,6 +22,11 @@ const Auth = () => {
     const handleShowPassword = () => {
       setShowPassword(!showPassword)
     };
+
+    const switchMode = () => {
+      setIsSignUp(!isSignUp);
+      setShowPassword(false);
+    }
 
     return (
       <Grow in>
@@ -43,6 +48,7 @@ const Auth = () => {
                       placeholder="Enter your first name"
                       label="First Name"
                       handleChange={handleChange}
+                      autoFocus={true}
                     />
                     <Input
                       half={true}
@@ -59,6 +65,7 @@ const Auth = () => {
                   label="Email"
                   handleChange={handleChange}
                   type="email"
+                  autoFocus={!isSignUp}
                 />
                 <Input
                   name="password"
@@ -78,9 +85,24 @@ const Auth = () => {
                   />
                 )}
               </Grid>
-              <Button type="submit" fullWidth variant="contained" color="primary" style={classes.submit}>
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                style={classes.submit}
+              >
                 {isSignUp ? "Sign Up" : "Sign In"}
               </Button>
+              <Grid container justifyContent="center">
+                <Grid item marginTop={2}>
+                  <Button onClick={switchMode} style={classes.switch}>
+                    {isSignUp
+                      ? "Already have an account? Sign In"
+                      : "Don't have an account? Sign Up"}
+                  </Button>
+                </Grid>
+              </Grid>
             </form>
           </Paper>
         </Container>
