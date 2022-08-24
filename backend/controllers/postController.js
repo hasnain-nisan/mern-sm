@@ -3,7 +3,6 @@ const { request } = require("express");
 const { mongoose } = require("mongoose");
 const { reset } = require("nodemon");
 const Post = require("../models/Post");
-const { log } = require("console");
 
 const getAllPosts = async (req, res) => {
   try {
