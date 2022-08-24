@@ -4,7 +4,11 @@ const signUp = async (req, res) => {
   try {
     const newUser = new User(req.body);
     await newUser.save();
-    res.status(200).json(newUser);
+    res.status(200).json({
+        user: newUser.getUser(),
+        accessToken: newUser.generateAccessToken(),
+        refreshToken: newUser.generateRefreshToken()
+    });
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
