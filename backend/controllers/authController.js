@@ -12,7 +12,7 @@ const signUp = async (req, res) => {
 
 const signIn = async (req, res) => {
   try {
-    console.log("sign in route");
+    console.log(process.env.ACCESS_TOKEN_SECRET);
     res.status(200).json("sign in route");
   } catch (error) {
     res.status(404).json({ message: error.message });

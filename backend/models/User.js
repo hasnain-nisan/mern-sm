@@ -37,6 +37,55 @@ userSchema.pre("save", async function() {
   this.password = await bcrypt.hash(this.password, salt)
 });
 
+//get user data
+userSchema.methods.getUser = function () {
+  return {
+    id: this._id,
+    firstName: this.firstName,
+    lastName: this.lastName,
+    email: this.email,
+  }
+}
+
+
+//generate access token
+userSchema.methods.generateAccessToken = function () {
+  const token = jwt.sign(
+    {
+      id: this._id,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      email: this.email,
+    },
+    process.env.ACCESS_TOKEN_SECRET,
+    { expiresIn: process.env.ACCESS_TOKEN_LIFETIME }
+  );
+
+  return token
+}
+
+//generate access token
+userSchema.methods.generateRefreshToken = function () {
+  const token = jwt.sign(
+    {
+      id: this._id,
+      firstName: this.firstName,
+      lastName: this.lastName,
+      email: this.email,
+    },
+    process.env.REFRESH_TOKEN_SECRET,
+    { expiresIn: process.env.REFRESH_TOKEN_LIFETIME }
+  );
+
+  return token
+}
+
+//comparte password
+userSchema.methods.comparePassword = async function (formPassword) {
+  const isMatch = await bcrypt.compare(formPassword, this.password)
+  return isMatch;
+}
+
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;
