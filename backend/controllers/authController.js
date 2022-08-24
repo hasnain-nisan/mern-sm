@@ -1,7 +1,10 @@
+const User = require('../models/User')
+
 const signUp = async (req, res) => {
   try {
-    console.log('sign up route');
-    res.status(200).json("sign up route");
+    const newUser = new User(req.body);
+    await newUser.save();
+    res.status(200).json(newUser);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -28,7 +31,7 @@ const refreshToken = async (req, res) => {
 const logOut = async (req, res) => {
   try {
     console.log("Logout route");
-    res.status(200).json("Logout route");
+    res.status(200).json(req.body);
   } catch (error) {
     res.status(404).json({ message: error.message });
   }

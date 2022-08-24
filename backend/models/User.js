@@ -14,17 +14,28 @@ const userSchema = mongoose.Schema(
       required: [true, "Please provide a last name"],
     },
     email: {
-        type: String,
-        required: [true, "Please provide an email"],
+      type: String,
+      required: [true, "Please provide an email"],
+      match: [
+        /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
+        "Please provide a valid email",
+      ],
+      unique: true,
     },
     password: {
-        type: String,
-        required: [true, "Please provide an password"],
-        minlength: 6,
+      type: String,
+      required: [true, "Please provide an password"],
+      minlength: 6,
     },
   },
   { timestamps: true }
 );
+
+//hashing password
+userSchema.pre("save", async function() {
+  const salt = await bcrypt.genSalt(10)
+  this.password = await bcrypt.hash(this.password, salt)
+});
 
 const User = mongoose.model("User", userSchema);
 

@@ -1,12 +1,15 @@
-@host = http://localhost:5000/api/v1/posts
+@host = http://localhost:5000/api/v1/
 
 
 ###
-GET {{host}} HTTP/1.1
+POST {{host}}auth/sign-up HTTP/1.1
 content-type: application/json
 
 {
-
+    "firstName": "Hasnain",
+    "lastName": "Nisan",
+    "email": "nisan@test.com",
+    "password": "password"
 }
 
 ###

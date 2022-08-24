@@ -2,9 +2,10 @@
   "name": "mern-social-media-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js"
+    "start": "node app.js",
+    "dev": "nodemon -L app.js"
   },
   "keywords": [],
   "author": "",
@@ -27,6 +28,6 @@
     "xss-clean": "^0.1.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.16"
+    "nodemon": "^2.0.2"
   }
 }
