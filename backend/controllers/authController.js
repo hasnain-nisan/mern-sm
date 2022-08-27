@@ -78,8 +78,10 @@ const refreshToken = async (req, res) => {
 
 const logOut = async (req, res) => {
   try {
-    console.log("Logout route");
-    res.status(200).json(req.body);
+    const cookies = req.cookies;
+    if (!cookies?.jwt) return res.sendStatus(204); //No content
+    clearCookiesJWT(res, 'jwt')
+    res.status(200).json({ message: "Successfully log out"});
   } catch (error) {
     res.status(404).json({ message: error.message });
   }
@@ -89,10 +91,19 @@ const logOut = async (req, res) => {
 const setCookieJWT = (res, name, value) => {
   res.cookie(name, value, {
     httpOnly: true, //accessible only by web server
-    // secure: true, //https
+    secure: true, //https
     sameSite: 'None', // cross site cookie
     maxAge: 1 * 24 * 60 * 60 * 1000 // cookie expiry
   })
+}
+
+//clear cookies
+const clearCookiesJWT = (res, name) => {
+  res.clearCookie(name, {
+    httpOnly: true, //accessible only by web server
+    secure: true, //https
+    sameSite: "None", // cross site cookie
+  });
 }
 
 module.exports = {
