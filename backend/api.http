@@ -13,6 +13,23 @@ content-type: application/json
 }
 
 ###
+POST {{host}}auth/sign-in HTTP/1.1
+content-type: application/json
+
+{
+    "email": "nisan@tastyTreat.com",
+    "password": "password"
+}
+
+###
+GET {{host}}auth/refresh-token HTTP/1.1
+content-type: application/json
+
+{
+    
+}
+
+###
 POST {{host}} HTTP/1.1
 content-type: application/json
 

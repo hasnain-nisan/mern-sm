@@ -6,6 +6,7 @@ const cors = require('cors')
 const helmet = require('helmet')
 const xss = require('xss-clean')
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const rateLimiter = require('express-rate-limit')
 
 //db connection string
@@ -29,6 +30,7 @@ app.use(
   })
 );
 app.use(express.json());
+app.use(cookieParser());
 app.use(bodyParser.json({ limit: "100mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "100mb", extended: true }));
 app.use(helmet());
