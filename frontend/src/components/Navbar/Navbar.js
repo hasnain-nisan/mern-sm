@@ -2,12 +2,12 @@ import { AppBar, Avatar, Button, Toolbar, Typography } from '@mui/material';
 import React from 'react'
 import classes from '../../styles';
 import {Link, useNavigate} from 'react-router-dom'
+import { useSelector } from 'react-redux';
 
 import memories from '../../images/memories.png'
 
 const Navbar = () => {
-
-  const user = null;
+  const user = useSelector((state) => state.authData.user);
   const navigate = useNavigate();
 
   return (

@@ -12,11 +12,13 @@ import "react-toastify/dist/ReactToastify.css";
 import { devToolsEnhancer } from '@redux-devtools/extension';
 
 import { BrowserRouter } from "react-router-dom";
+import authReducer from './reducers/auth';
 
 const store = configureStore(
   {
     reducer: {
       postData: postReducer,
+      authData: authReducer,
     },
   },
   devToolsEnhancer()

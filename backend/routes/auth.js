@@ -8,9 +8,9 @@ const {
   logOut,
 } = require("../controllers/authController.js");
 
-router.post("/sign-up", signUp);
-router.post("/sign-in", signIn);
-router.get("/refresh-token", refreshToken);
-router.post("/logout", logOut);
+router.post("/signUp", signUp);
+router.post("/signIn", signIn);
+router.get("/refreshToken", refreshToken);
+router.post("/logOut", logOut);
 
 module.exports = router;

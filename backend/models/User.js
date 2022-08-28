@@ -53,8 +53,7 @@ userSchema.methods.generateAccessToken = function () {
   const token = jwt.sign(
     {
       id: this._id,
-      firstName: this.firstName,
-      lastName: this.lastName,
+      name: this.firstName + " " + this.lastName,
       email: this.email,
     },
     process.env.ACCESS_TOKEN_SECRET,
@@ -69,8 +68,7 @@ userSchema.methods.generateRefreshToken = function () {
   const token = jwt.sign(
     {
       id: this._id,
-      firstName: this.firstName,
-      lastName: this.lastName,
+      name: this.firstName + " " + this.lastName,
       email: this.email,
     },
     process.env.REFRESH_TOKEN_SECRET,

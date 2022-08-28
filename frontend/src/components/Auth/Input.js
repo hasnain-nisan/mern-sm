@@ -2,7 +2,7 @@ import React from 'react'
 import { TextField, Grid, InputAdornment, IconButton } from '@mui/material'
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md'
 
-const Input = ({half, name, placeholder, label, autoFocus, type, handleShowPassword}) => {
+const Input = ({half, name, placeholder, label, autoFocus, type, handleShowPassword, handleChange}) => {
   return (
     <Grid item xs={12} sm={half ? 6 : 12}>
         <TextField 
@@ -10,7 +10,7 @@ const Input = ({half, name, placeholder, label, autoFocus, type, handleShowPassw
             placeholder={placeholder}
             label={label}
             fullWidth={true}
-            // onChange={}
+            onChange={handleChange}
             variant="outlined"
             required={true}
             autoFocus={autoFocus}

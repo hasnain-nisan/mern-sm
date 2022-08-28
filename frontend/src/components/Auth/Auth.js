@@ -1,22 +1,45 @@
 import { Avatar, Button, Container, Grid, Grow, Paper, Typography } from '@mui/material';
 import React, {useState} from 'react'
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 import classes from './style';
 
 import { GiWolfHowl } from "react-icons/gi";
 import Input from './Input';
+import { register } from '../../actions/auth';
+import { toast } from 'react-toastify';
 
 const Auth = () => {
-
-    const [isSignUp, setIsSignUp] = useState(false)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
+    const [isSignUp, setIsSignUp] = useState(true)
     const [showPassword, setShowPassword] = useState(false)
+    const [formData, setFormData] = useState({
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      confirmPassword: ""
+    });
 
-    const handleSubmit = () => {
-        console.log("submit");
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        if(isSignUp){
+          if(formData.password === formData.confirmPassword){
+            dispatch(register(formData, navigate))
+          } else {
+            toast.error('Password dont matched');
+          }
+        } else {
+
+        }
     }
 
-    const handleChange = () => {
-      console.log("changed");
+    const handleChange = (e) => {
+      if(e) {
+        setFormData({...formData, [e.target.name]: e.target.value})
+      }
     };
 
     const handleShowPassword = () => {
@@ -44,7 +67,7 @@ const Auth = () => {
                   <>
                     <Input
                       half={true}
-                      name="First name"
+                      name="firstName"
                       placeholder="Enter your first name"
                       label="First Name"
                       handleChange={handleChange}
@@ -52,7 +75,7 @@ const Auth = () => {
                     />
                     <Input
                       half={true}
-                      name="Last name"
+                      name="lastName"
                       placeholder="Enter your Last name"
                       label="Last Name"
                       handleChange={handleChange}
