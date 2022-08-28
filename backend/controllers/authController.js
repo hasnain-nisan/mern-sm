@@ -9,7 +9,6 @@ const signUp = async (req, res) => {
     const refreshToken = newUser.generateRefreshToken()
     setCookieJWT(res, 'jwt', refreshToken);
     res.status(200).json({
-        user: newUser.getUser(),
         accessToken
     });
   } catch (error) {
@@ -39,7 +38,6 @@ const signIn = async (req, res) => {
     const refreshToken = foundUser.generateRefreshToken();
     setCookieJWT(res, "jwt", refreshToken);
     res.status(200).json({
-      user: foundUser.getUser(),
       accessToken,
     });
   } catch (error) {
@@ -66,7 +64,6 @@ const refreshToken = async (req, res) => {
 
         const accessToken = foundUser.generateAccessToken()
         res.status(200).json({
-          user: foundUser.getUser(),
           accessToken,
         });
       }
