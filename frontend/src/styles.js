@@ -22,6 +22,9 @@ const classes = {
         display: "flex",
         justifyContent: "center",
         alignItems: "center"
+    },
+    toolbar: {
+        padding: "20px 0px"
     }
 }
 

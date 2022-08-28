@@ -4,7 +4,7 @@ export const url = "http://localhost:5000/api/v1";
 
 export const register = (formData) => axios.post(`${url}/auth/signUp`, formData);
 export const login = (formData) => axios.post(`${url}/auth/signIn`, formData);
-export const refreshToken = () => axios.get(`${url}/auth/refreshToken`);
+// export const refreshToken = () => axios.get(`${url}/auth/refreshToken`, { withCredentials: true });
 export const logout = () => axios.post(`${url}/auth/logOut`);
 
 export const fetchPosts = () => axios.get(`${url}/posts`)

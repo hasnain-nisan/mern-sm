@@ -7,13 +7,13 @@ import classes from './style';
 
 import { GiWolfHowl } from "react-icons/gi";
 import Input from './Input';
-import { register } from '../../actions/auth';
+import { login, register } from '../../actions/auth';
 import { toast } from 'react-toastify';
 
 const Auth = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    const [isSignUp, setIsSignUp] = useState(true)
+    const [isSignUp, setIsSignUp] = useState(false)
     const [showPassword, setShowPassword] = useState(false)
     const [formData, setFormData] = useState({
       firstName: "",
@@ -32,7 +32,7 @@ const Auth = () => {
             toast.error('Password dont matched');
           }
         } else {
-
+          dispatch(login(formData, navigate));
         }
     }
 

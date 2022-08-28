@@ -13,7 +13,7 @@ content-type: application/json
 }
 
 ###
-POST {{host}}auth/sign-in HTTP/1.1
+POST {{host}}auth/signIn HTTP/1.1
 content-type: application/json
 
 {

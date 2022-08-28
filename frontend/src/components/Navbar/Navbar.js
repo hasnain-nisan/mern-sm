@@ -2,13 +2,15 @@ import { AppBar, Avatar, Button, Toolbar, Typography } from '@mui/material';
 import React from 'react'
 import classes from '../../styles';
 import {Link, useNavigate} from 'react-router-dom'
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import memories from '../../images/memories.png'
+import { logout } from '../../actions/auth';
 
 const Navbar = () => {
   const user = useSelector((state) => state.authData.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch()
 
   return (
     <AppBar style={classes.appBar} position="static" color="inherit">
@@ -44,6 +46,7 @@ const Navbar = () => {
               variant="contained"
               style={classes.logout}
               color="secondary"
+              onClick={() => dispatch(logout())}
             >
               Logout
             </Button>

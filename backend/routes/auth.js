@@ -10,7 +10,7 @@ const {
 
 router.post("/signUp", signUp);
 router.post("/signIn", signIn);
-router.get("/refreshToken", refreshToken);
+// router.get("/refreshToken", refreshToken);
 router.post("/logOut", logOut);
 
 module.exports = router;

@@ -45,33 +45,33 @@ const signIn = async (req, res) => {
   }
 };
 
-const refreshToken = async (req, res) => {
-  try {
-    const cookies = req.cookies;
-    if (!cookies?.jwt) return res.status(401).json({ message: "Unauthorized" });
+// const refreshToken = async (req, res) => {
+//   try {
+//     const cookies = req.cookies;
+//     if (!cookies?.jwt) return res.status(401).json({ message: "Unauthorized" });
     
-    const refreshToken = cookies.jwt;
+//     const refreshToken = cookies.jwt;
     
-    jwt.verify(
-      refreshToken,
-      process.env.REFRESH_TOKEN_SECRET,
-      async function(err, decoded){
-        if (err) return res.status(403).json({ message: "Forbidden" });
+//     jwt.verify(
+//       refreshToken,
+//       process.env.REFRESH_TOKEN_SECRET,
+//       async function(err, decoded){
+//         if (err) return res.status(403).json({ message: "Forbidden" });
         
-        const foundUser = await User.findOne({email: decoded.email})
-        if (!foundUser)
-          return res.status(401).json({ message: "Unauthorized" });
+//         const foundUser = await User.findOne({email: decoded.email})
+//         if (!foundUser)
+//           return res.status(401).json({ message: "Unauthorized" });
 
-        const accessToken = foundUser.generateAccessToken()
-        res.status(200).json({
-          accessToken,
-        });
-      }
-    );
-  } catch (error) {
-    res.status(404).json({ message: error.message });
-  }
-};
+//         const accessToken = foundUser.generateAccessToken()
+//         res.status(200).json({
+//           accessToken,
+//         });
+//       }
+//     );
+//   } catch (error) {
+//     res.status(404).json({ message: error.message });
+//   }
+// };
 
 const logOut = async (req, res) => {
   try {
@@ -88,7 +88,7 @@ const logOut = async (req, res) => {
 const setCookieJWT = (res, name, value) => {
   res.cookie(name, value, {
     httpOnly: true, //accessible only by web server
-    secure: true, //https
+    // secure: true, //https
     sameSite: 'None', // cross site cookie
     maxAge: 1 * 24 * 60 * 60 * 1000 // cookie expiry
   })
