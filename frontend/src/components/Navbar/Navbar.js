@@ -12,13 +12,6 @@ const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch()
 
-  const checkToken = (exp) => {
-    if (Date.now() >= exp * 1000) {
-      return false;
-    }
-    return true
-  }
-
   // useEffect(() => {
   //   const interval = setInterval(() => {
   //     if(user) {
