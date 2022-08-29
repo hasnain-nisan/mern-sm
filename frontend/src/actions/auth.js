@@ -1,6 +1,5 @@
 import * as api from "../api";
 import { AUTH, LOGOUT } from "../constants/actionTypes";
-import Cookies from "js-cookie";
 
 export const register = (formData, navigate) => async (dispatch) => {
   try {

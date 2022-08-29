@@ -1,5 +1,5 @@
 import { AppBar, Avatar, Button, Toolbar, Typography } from '@mui/material';
-import React from 'react'
+import React, { useEffect } from 'react'
 import classes from '../../styles';
 import {Link, useNavigate} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,6 +11,27 @@ const Navbar = () => {
   const user = useSelector((state) => state.authData.user);
   const navigate = useNavigate();
   const dispatch = useDispatch()
+
+  const checkToken = (exp) => {
+    if (Date.now() >= exp * 1000) {
+      return false;
+    }
+    return true
+  }
+
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     if(user) {
+  //       let valid = (checkToken(user?.exp))
+  //       if(!valid) {
+  //         dispatch(logout())
+  //       } else {
+  //         console.log("log outing");
+  //       }
+  //     }
+  //   }, 1000)
+  //   return () => clearInterval(interval);
+  // },[user])
 
   return (
     <AppBar style={classes.appBar} position="static" color="inherit">

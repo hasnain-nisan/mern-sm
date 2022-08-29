@@ -13,6 +13,7 @@ import { devToolsEnhancer } from '@redux-devtools/extension';
 
 import { BrowserRouter } from "react-router-dom";
 import authReducer from './reducers/auth';
+import {isTokenVerified} from './utils/CheckTokenValidation';
 
 const store = configureStore(
   {
@@ -20,6 +21,7 @@ const store = configureStore(
       postData: postReducer,
       authData: authReducer,
     },
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(isTokenVerified),
   },
   devToolsEnhancer()
 );

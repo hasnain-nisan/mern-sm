@@ -6,8 +6,6 @@ const signUp = async (req, res) => {
     const newUser = new User(req.body);
     await newUser.save();
     const accessToken =  newUser.generateAccessToken()
-    const refreshToken = newUser.generateRefreshToken()
-    setCookieJWT(res, 'jwt', refreshToken);
     res.status(200).json({
         accessToken
     });
@@ -35,8 +33,6 @@ const signIn = async (req, res) => {
     }
 
     const accessToken = foundUser.generateAccessToken();
-    const refreshToken = foundUser.generateRefreshToken();
-    setCookieJWT(res, "jwt", refreshToken);
     res.status(200).json({
       accessToken,
     });
@@ -85,27 +81,26 @@ const logOut = async (req, res) => {
 };
 
 //create secure cookie with refresh token
-const setCookieJWT = (res, name, value) => {
-  res.cookie(name, value, {
-    httpOnly: true, //accessible only by web server
-    // secure: true, //https
-    sameSite: 'None', // cross site cookie
-    maxAge: 1 * 24 * 60 * 60 * 1000 // cookie expiry
-  })
-}
+// const setCookieJWT = (res, name, value) => {
+//   res.cookie(name, value, {
+//     httpOnly: true, //accessible only by web server
+//     // secure: true, //https
+//     sameSite: 'None', // cross site cookie
+//     maxAge: 1 * 24 * 60 * 60 * 1000 // cookie expiry
+//   })
+// }
 
 //clear cookies
-const clearCookiesJWT = (res, name) => {
-  res.clearCookie(name, {
-    httpOnly: true, //accessible only by web server
-    secure: true, //https
-    sameSite: "None", // cross site cookie
-  });
-}
+// const clearCookiesJWT = (res, name) => {
+//   res.clearCookie(name, {
+//     httpOnly: true, //accessible only by web server
+//     secure: true, //https
+//     sameSite: "None", // cross site cookie
+//   });
+// }
 
 module.exports = {
   signUp,
   signIn,
-  refreshToken,
   logOut
 };

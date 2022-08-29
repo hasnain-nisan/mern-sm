@@ -5,6 +5,7 @@ import classes from './styles'
 import { createPost, updatePost } from '../../actions/posts';
 
 import { toast } from "react-toastify";
+import { SET_CURRENT_POST_ID } from '../../constants/actionTypes';
 
 
 const Form = () => {
@@ -47,6 +48,10 @@ const Form = () => {
   }
 
   const reset = () => {
+    dispatch({
+      type: SET_CURRENT_POST_ID,
+      payload: null,
+    });
     setPostData({
       creator: "",
       title: "",
