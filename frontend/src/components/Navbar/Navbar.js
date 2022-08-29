@@ -1,5 +1,4 @@
 import { AppBar, Avatar, Button, Toolbar, Typography } from '@mui/material';
-import React, { useEffect } from 'react'
 import classes from '../../styles';
 import {Link, useNavigate} from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
